@@ -34,21 +34,27 @@ function App() {
   const [query, setQuery] = useState("");
   const [uploadSource, setUploadSource] = useState("");
   const [file, setFile] = useState(null);
+  const [error, setError] = useState("");
 
   async function refresh() {
-    const [user, dash, src, batch, rows] = await Promise.all([
-      api("/me/"),
-      api("/dashboard/"),
-      api("/sources/"),
-      api("/batches/"),
-      api(`/activities/${status ? `?status=${status}` : ""}`),
-    ]);
-    setMe(user);
-    setDashboard(dash);
-    setSources(src);
-    setBatches(batch);
-    setActivities(rows);
-    setSelected((current) => current ? rows.find((row) => row.id === current.id) || rows[0] : rows[0]);
+    try {
+      setError("");
+      const [user, dash, src, batch, rows] = await Promise.all([
+        api("/me/"),
+        api("/dashboard/"),
+        api("/sources/"),
+        api("/batches/"),
+        api(`/activities/${status ? `?status=${status}` : ""}`),
+      ]);
+      setMe(user);
+      setDashboard(dash);
+      setSources(src);
+      setBatches(batch);
+      setActivities(rows);
+      setSelected((current) => current ? rows.find((row) => row.id === current.id) || rows[0] : rows[0]);
+    } catch (err) {
+      setError(`Could not load backend data from ${API}. Check that Django is running on port 8000. ${err.message}`);
+    }
   }
 
   useEffect(() => { refresh(); }, [status]);
@@ -98,6 +104,7 @@ function App() {
           </select>
           <input type="file" accept=".csv" onChange={(event) => setFile(event.target.files[0])} />
           <button onClick={upload}><FileUp size={16} /> Import CSV</button>
+          {error && <p className="error">{error}</p>}
         </section>
       </aside>
 

@@ -80,6 +80,16 @@ select, input {
   padding-top: 18px;
 }
 
+.error {
+  background: #f8dedb;
+  border: 1px solid #e7a39b;
+  border-radius: 6px;
+  color: #8b241a;
+  font-size: 13px;
+  line-height: 1.4;
+  padding: 10px;
+}
+
 h1, h2, h3, p {
   margin: 0;
 }
