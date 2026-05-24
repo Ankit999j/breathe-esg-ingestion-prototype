@@ -1,0 +1,6 @@
+Trip ID,Transaction Date,Employee,Category,Origin Airport,Destination Airport,Distance,Unit,Amount
+TR-1001,2026-04-04,Ana Gomez,Flight,BLR,DEL,,km,520
+TR-1002,2026-04-08,Ravi Shah,Flight,DEL,FRA,,km,1190
+TR-1003,04/09/2026,Mina Patel,Hotel,,,3,room-night,645
+TR-1004,2026-04-10,Chris Lee,Ground Transport,,,42,mile,130
+TR-1005,2026-04-12,Sam Wu,Flight,SFO,,,km,410
